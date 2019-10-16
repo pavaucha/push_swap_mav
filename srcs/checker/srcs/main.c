@@ -2,15 +2,18 @@
 
 int main(int ac, char **av)
 {
-	ac = 0;
-	int fd;
 	(void)av;
 	char *str;
+	int ret;
 
-	fd = open(av[1], O_RDONLY);
+	for (int i = 0; i < ac; i++)
+		ft_printf("av[%d] = %s\n", i, av[i]);
+	while ((ret = get_next_line(0, &str)) > 0)
+	{
 
-	while (get_next_line(fd, &str) != 0)
-		ft_printf("%s\n", str);
-
+		if (str[0] == '\0' || str[0] == '\n')
+			break;
+		free(str);
+	}
 	return 0;
 }
